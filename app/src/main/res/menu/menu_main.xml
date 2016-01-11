@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_add" android:title="@string/menu_add"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/menu_export" android:title="@string/menu_export"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/menu_import" android:title="@string/menu_import"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        appcompat:actionViewClass="android.support.v7.widget.SearchView"
+        appcompat:showAsAction="ifRoom"/>
+</menu>

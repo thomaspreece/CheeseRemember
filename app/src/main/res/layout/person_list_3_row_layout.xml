@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/listText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/list_item_vertical_margin"
+        android:paddingRight="@dimen/list_item_vertical_margin"
+        android:paddingTop="@dimen/list_item_horizontal_margin"
+        android:paddingBottom="2dp"
+        android:textColor="#222222"
+        android:textSize="18sp"
+        android:text="Full Name"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description..."
+        android:paddingLeft="@dimen/list_item_vertical_margin"
+        android:paddingRight="@dimen/list_item_vertical_margin"
+        android:paddingTop="0dp"
+        android:paddingBottom="2dp"
+        android:textColor="#222222"
+        android:textSize="18sp"
+        android:id="@+id/listText2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:paddingLeft="@dimen/list_item_vertical_margin"
+        android:paddingRight="@dimen/list_item_vertical_margin"
+        android:paddingTop="0dp"
+        android:paddingBottom="@dimen/list_item_horizontal_margin"
+        android:textColor="#222222"
+        android:textSize="12sp"
+        android:id="@+id/listText3" />
+
+</LinearLayout>
