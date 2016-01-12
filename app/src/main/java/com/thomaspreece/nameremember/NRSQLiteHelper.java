@@ -133,9 +133,17 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         Cursor cursor;
         // Get all persons
         if(term == null || term.trim().length() == 0 ){
-            cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_LASTN+" COLLATE NOCASE ASC, "+persons_FIRSTN+" COLLATE NOCASE ASC");
+            if(searchType==0){
+                cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_DATE + " COLLATE NOCASE DESC, " + persons_LASTN + " COLLATE NOCASE ASC, " + persons_FIRSTN + " COLLATE NOCASE ASC");
+            }else {
+                cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_LASTN + " COLLATE NOCASE ASC, " + persons_FIRSTN + " COLLATE NOCASE ASC");
+            }
         }else {
             switch (searchType) {
+                case 0:
+                    searchQuery = "SELECT * FROM persons WHERE `date` LIKE ? ORDER BY date COLLATE NOCASE DESC ,lastN COLLATE NOCASE ASC, firstN COLLATE NOCASE ASC";
+                    cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%"});
+                    break;
                 case 1:
                     searchQuery = "SELECT * FROM persons WHERE (firstN || ' ' || lastN) LIKE ? ORDER BY (firstN || ' ' || lastN) = ? COLLATE NOCASE DESC, (firstN || ' ' || lastN) LIKE ? DESC, lastN COLLATE NOCASE ASC, firstN COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%", term, "%" + term + "%"});

@@ -44,11 +44,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ListView list;
     private String searchText;
 
+    private ToggleButton recentToggle;
     private ToggleButton nameToggle;
     private ToggleButton keywordsToggle;
     private ToggleButton descToggle;
     private ToggleButton interestsToggle;
     private LinearLayout searchOptionButtons;
+
     private boolean searchOptionsButtonsInView;
 
     private int activeToggle;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        this.activeToggle = 1;
+        this.activeToggle = 0;
         super.onCreate(savedInstanceState);
 
         PACKAGE_NAME = getApplicationContext().getPackageName();
@@ -100,17 +102,28 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
+        recentToggle = (ToggleButton) findViewById(R.id.searchOptionButtonRecent);
         nameToggle = (ToggleButton) findViewById(R.id.searchOptionButtonName);
         keywordsToggle = (ToggleButton) findViewById(R.id.searchOptionButtonKeywords);
         descToggle = (ToggleButton) findViewById(R.id.searchOptionButtonDesc);
         interestsToggle = (ToggleButton) findViewById(R.id.searchOptionButtonInterests);
         searchOptionButtons = (LinearLayout) findViewById(R.id.searchButtons);
 
+        recentToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activeToggle = 0;
+                setToggles();
+                updateToggleSearch();
+            }
+        });
+
         nameToggle.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 activeToggle = 1;
                 setToggles();
+                updateToggleSearch();
             }
         });
 
@@ -119,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onClick(View v) {
                 activeToggle = 2;
                 setToggles();
+                updateToggleSearch();
             }
         });
 
@@ -127,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onClick(View v) {
                 activeToggle = 3;
                 setToggles();
+                updateToggleSearch();
             }
         });
 
@@ -135,51 +150,46 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onClick(View v) {
                 activeToggle = 4;
                 setToggles();
+                updateToggleSearch();
             }
         });
 
         this.setToggles();
 
+    }
 
+    private void updateToggleSearch(){
+        personList = db.getSearchPersons(searchText,activeToggle);
+        this.refreshPersonList();
     }
 
     private void setToggles(){
+        recentToggle.setChecked(false);
+        nameToggle.setChecked(false);
+        keywordsToggle.setChecked(false);
+        descToggle.setChecked(false);
+        interestsToggle.setChecked(false);
+
         switch (activeToggle){
+            case 0:
+                recentToggle.setChecked(true);
+                break;
             case 1:
                 nameToggle.setChecked(true);
-                keywordsToggle.setChecked(false);
-                descToggle.setChecked(false);
-                interestsToggle.setChecked(false);
-                personList = db.getSearchPersons(searchText,activeToggle);
-                this.refreshPersonList();
                 break;
             case 2:
-                nameToggle.setChecked(false);
                 keywordsToggle.setChecked(true);
-                descToggle.setChecked(false);
-                interestsToggle.setChecked(false);
-                personList = db.getSearchPersons(searchText,activeToggle);
-                this.refreshPersonList();
                 break;
             case 3:
-                nameToggle.setChecked(false);
-                keywordsToggle.setChecked(false);
                 descToggle.setChecked(true);
-                interestsToggle.setChecked(false);
-                personList = db.getSearchPersons(searchText,activeToggle);
-                this.refreshPersonList();
                 break;
             case 4:
-                nameToggle.setChecked(false);
-                keywordsToggle.setChecked(false);
-                descToggle.setChecked(false);
                 interestsToggle.setChecked(true);
-                personList = db.getSearchPersons(searchText,activeToggle);
-                this.refreshPersonList();
                 break;
             default:
                 throw new RuntimeException("Invalid Toggle State: "+activeToggle );
         }
+
     }
 
     @Override
@@ -197,14 +207,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             temp.put("name", personList.get(i).getFirstName()+" "+personList.get(i).getLastName());
             if(searchOptionsButtonsInView == true){
                 switch(activeToggle){
+                    case 0:
+                        temp.put("other", "");
+                        break;
                     case 1:
+                    case 3:
                         temp.put("other", personList.get(i).getDescription());
                         break;
                     case 2:
                         temp.put("other", personList.get(i).getKeywordsString());
-                        break;
-                    case 3:
-                        temp.put("other", personList.get(i).getDescription());
                         break;
                     case 4:
                         temp.put("other", personList.get(i).getInterests());
@@ -219,21 +230,21 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             dataList.add(temp);
         }
 
-        if (searchOptionsButtonsInView == true) {
-            adapter = new SimpleAdapter(
-                    this,
-                    dataList,
-                    R.layout.person_list_3_row_layout,
-                    new String[]{"name", "other", "date"},
-                    new int[]{R.id.listText, R.id.listText2, R.id.listText3}
-            );
-        }else{
+        if (searchOptionsButtonsInView == false || activeToggle == 0) {
             adapter = new SimpleAdapter(
                     this,
                     dataList,
                     R.layout.person_list_2_row_layout,
                     new String[]{"name", "date"},
                     new int[]{R.id.listText, R.id.listText3}
+            );
+        }else{
+            adapter = new SimpleAdapter(
+                    this,
+                    dataList,
+                    R.layout.person_list_3_row_layout,
+                    new String[]{"name", "other", "date"},
+                    new int[]{R.id.listText, R.id.listText2, R.id.listText3}
             );
         }
         list = (ListView) findViewById(R.id.list);
@@ -262,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public void onClick(View v){
         searchOptionButtons.setVisibility(View.VISIBLE);
         searchOptionsButtonsInView = true;
+        this.updateToggleSearch();
     }
 
     //Search On Close Function

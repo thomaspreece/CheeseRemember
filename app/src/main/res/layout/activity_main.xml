@@ -24,8 +24,23 @@
                   style="?android:attr/buttonBarStyle"
         >
         <ToggleButton
+            android:layout_width="0dip"
+            android:textSize="10dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textOff="Recent"
+            android:textOn="Recent"
+            android:id="@+id/searchOptionButtonRecent"
+            android:background="@drawable/search_option_toggle_buttons"
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/search_button_margin_top"
+            android:layout_marginBottom="@dimen/search_button_margin_bottom"
+            />
+
+        <ToggleButton
 
             android:layout_width="0dip"
+            android:textSize="10dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textOff="Name"
@@ -39,6 +54,7 @@
 
         <ToggleButton
             android:layout_width="0dip"
+            android:textSize="10dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textOff="Keywords"
@@ -52,6 +68,7 @@
 
         <ToggleButton
             android:layout_width="0dip"
+            android:textSize="10dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textOff="Desc"
@@ -65,6 +82,7 @@
 
         <ToggleButton
             android:layout_width="0dip"
+            android:textSize="10dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textOff="Interests"
