@@ -274,6 +274,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         searchOptionButtons.setVisibility(View.VISIBLE);
         searchOptionsButtonsInView = true;
         this.updateToggleSearch();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
     }
 
     //Search On Close Function

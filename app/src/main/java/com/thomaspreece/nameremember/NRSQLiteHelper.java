@@ -135,7 +135,9 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         if(term == null || term.trim().length() == 0 ){
             if(searchType==0){
                 cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_DATE + " COLLATE NOCASE DESC, " + persons_LASTN + " COLLATE NOCASE ASC, " + persons_FIRSTN + " COLLATE NOCASE ASC");
-            }else {
+            }else if(searchType==1) {
+                cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_FIRSTN + " COLLATE NOCASE ASC, " + persons_LASTN + " COLLATE NOCASE ASC");
+            }else{
                 cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_LASTN + " COLLATE NOCASE ASC, " + persons_FIRSTN + " COLLATE NOCASE ASC");
             }
         }else {
@@ -145,8 +147,8 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%"});
                     break;
                 case 1:
-                    searchQuery = "SELECT * FROM persons WHERE (firstN || ' ' || lastN) LIKE ? ORDER BY (firstN || ' ' || lastN) = ? COLLATE NOCASE DESC, (firstN || ' ' || lastN) LIKE ? DESC, lastN COLLATE NOCASE ASC, firstN COLLATE NOCASE ASC";
-                    cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%", term, "%" + term + "%"});
+                    searchQuery = "SELECT * FROM persons WHERE (firstN || ' ' || lastN) LIKE ? ORDER BY (firstN || ' ' || lastN) = ? COLLATE NOCASE DESC, (firstN || ' ' || lastN) LIKE ? DESC, firstN COLLATE NOCASE ASC, lastN COLLATE NOCASE ASC";
+                    cursor = db.rawQuery(searchQuery, new String[]{"%" + term.toLowerCase() + "%", term.toLowerCase(), "%" + term.toLowerCase() + "%"});
                     break;
                 case 2:
                     searchQuery = "SELECT DISTINCT persons.* FROM ((persons_keywords INNER JOIN keywords ON keywords.id = persons_keywords.keyword_id AND keywords.keyword LIKE ?) INNER JOIN persons ON persons.id = persons_keywords.person_id ) ORDER BY  keywords.keyword = ? DESC ,keywords.keyword LIKE ? DESC, lastN COLLATE NOCASE ASC, firstN COLLATE NOCASE ASC";
