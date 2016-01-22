@@ -30,4 +30,7 @@
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <string name="NotificationTag">NameRemember</string>
+    <string name="Notification">Have you met any new people today?</string>
 </resources>

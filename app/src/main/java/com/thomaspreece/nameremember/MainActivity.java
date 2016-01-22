@@ -1,5 +1,7 @@
 package com.thomaspreece.nameremember;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -155,6 +157,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
 
         this.setToggles();
+
+
+
 
     }
 
