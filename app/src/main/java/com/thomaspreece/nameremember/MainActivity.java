@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ToggleButton descToggle;
     private ToggleButton interestsToggle;
     private LinearLayout searchOptionButtons;
+    private LinearLayout addPersonButton;
 
     private boolean searchOptionsButtonsInView;
 
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         searchOptionButtons = (LinearLayout) findViewById(R.id.searchButtons);
         searchOptionButtons.setVisibility(View.GONE);
+
+        addPersonButton = (LinearLayout) findViewById(R.id.addPersonLayout);
+        addPersonButton.setVisibility(View.VISIBLE);
         searchOptionsButtonsInView = false;
 
         // get all persons
@@ -200,8 +204,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        personList = db.getAllPersons();
-        this.refreshPersonList();
+        //Only update if we are not in middle of search
+        if(searchOptionsButtonsInView == false){
+            personList = db.getAllPersons();
+            this.refreshPersonList();
+        }
+
     }
 
     private void refreshPersonList(){
@@ -277,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     //Search On Open Function
     public void onClick(View v){
         searchOptionButtons.setVisibility(View.VISIBLE);
+        addPersonButton.setVisibility(View.GONE);
         searchOptionsButtonsInView = true;
         this.updateToggleSearch();
         if (v != null) {
@@ -288,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     //Search On Close Function
     public boolean onClose() {
         searchOptionButtons.setVisibility(View.GONE);
+        addPersonButton.setVisibility(View.VISIBLE);
         searchOptionsButtonsInView = false;
         personList = db.getAllPersons();
         this.refreshPersonList();
@@ -297,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String newText) {
         searchOptionButtons.setVisibility(View.VISIBLE);
+        addPersonButton.setVisibility(View.GONE);
         searchOptionsButtonsInView = true;
         searchText = newText;
         personList = db.getSearchPersons(newText,activeToggle);
