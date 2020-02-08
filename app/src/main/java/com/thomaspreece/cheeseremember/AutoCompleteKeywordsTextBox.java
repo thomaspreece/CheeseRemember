@@ -1,4 +1,4 @@
-package com.thomaspreece.nameremember;
+package com.thomaspreece.cheeseremember;
 
 import android.content.Context;
 import android.text.Editable;

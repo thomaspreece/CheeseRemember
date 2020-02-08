@@ -1,4 +1,4 @@
-package com.thomaspreece.nameremember;
+package com.thomaspreece.cheeseremember;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

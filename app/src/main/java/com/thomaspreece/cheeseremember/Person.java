@@ -1,4 +1,4 @@
-package com.thomaspreece.nameremember;
+package com.thomaspreece.cheeseremember;
 
 import java.text.DateFormat;
 import java.util.ArrayList;

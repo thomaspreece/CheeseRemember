@@ -1,4 +1,4 @@
-package com.thomaspreece.nameremember;
+package com.thomaspreece.cheeseremember;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
