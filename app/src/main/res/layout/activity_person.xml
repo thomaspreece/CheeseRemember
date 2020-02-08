@@ -15,6 +15,31 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingTop="20dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:text="@string/place_hint"
+        android:id="@+id/popTextStatic"
+        android:layout_below="@+id/description"
+        android:layout_alignParentStart="true"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars = "vertical"
+        android:textIsSelectable="true"
+        android:text="New Text"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:id="@+id/placeOfPurchase"
+        android:layout_below="@+id/popTextStatic"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +48,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingTop="20dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Description"
+        android:text="@String/desc_hint"
         android:id="@+id/dTextStatic"
         android:layout_alignParentStart="true"
         android:textSize="16dp"
@@ -43,31 +68,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_alignParentStart="true"
         android:textSize="20dp" />
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:paddingTop="20dp"
-          android:paddingLeft="@dimen/activity_horizontal_margin"
-          android:paddingRight="@dimen/activity_horizontal_margin"
-          android:text="Place of Purchase"
-          android:id="@+id/popTextStatic"
-          android:layout_below="@+id/description"
-          android:layout_alignParentStart="true"
-          android:textSize="16dp" />
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:scrollbars = "vertical"
-          android:textIsSelectable="true"
-          android:text="New Text"
-          android:paddingLeft="@dimen/activity_horizontal_margin"
-          android:paddingRight="@dimen/activity_horizontal_margin"
-          android:id="@+id/placeOfPurchase"
-          android:layout_below="@+id/popTextStatic"
-          android:layout_alignParentStart="true"
-          android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingTop="20dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Comments"
+        android:text="@String/comments_hint"
         android:id="@+id/iTextStatic"
         android:layout_below="@+id/placeOfPurchase"
         android:layout_alignParentStart="true"
@@ -103,7 +103,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingTop="20dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Keywords"
+        android:text="@String/tags_hint"
         android:id="@+id/kTextStatic"
         android:layout_below="@+id/interests"
         android:layout_alignParentStart="true"

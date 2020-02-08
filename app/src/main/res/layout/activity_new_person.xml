@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:inputType="textPersonName"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:hint="Cheese Name"
+            android:hint="@string/name_hint"
             android:text=""
             android:ems="10"
             android:id="@+id/cheeseN"
@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:inputType="textPersonName"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:hint="Place of Purchase"
+            android:hint="@string/place_hint"
             android:text=""
             android:ems="10"
             android:id="@+id/placeOfPurchase" />
@@ -48,7 +48,7 @@
         android:singleLine="true"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:hint="Tags"
+        android:hint="@string/tags_hint"
         android:text=""/>
 
 
@@ -60,7 +60,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_weight="1"
         android:layout_gravity="top"
-        android:hint="Description"
+        android:hint="@string/desc_hint"
         android:text=""/>
 
 
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/comments"
-        android:hint="comments"
+        android:hint="@string/comments_hint"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_weight="1"

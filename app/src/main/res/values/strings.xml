@@ -1,19 +1,32 @@
 <resources>
-    <string name="app_name">Name Remember</string>
-    <string name="new_person">New Contact</string>
-    <string name="edit_person">Edit Contact</string>
+    <string name="app_name">Cheese Remember</string>
+    <string name="new_person">New Cheese</string>
+    <string name="edit_person">Edit Cheese</string>
 
     <string name="action_settings">Settings</string>
     <string name="menu_add">Add</string>
     <string name="menu_export">Export</string>
     <string name="menu_import">Import</string>
 
-    <string name="button_add">Add Person</string>
+    <string name="recent_toggle">Recent</string>
+    <string name="name_toggle">Name</string>
+    <string name="place_toggle">Place of Purchase</string>
+    <string name="keywords_toggle">Keywords</string>
+    <string name="desc_toggle">Description</string>
+    <string name="comments_toggle">Comments</string>
+
+    <string name="name_hint">Cheese Name</string>
+    <string name="place_hint">Place of Purchase</string>
+    <string name="tags_hint">Keywords</string>
+    <string name="desc_hint">Description</string>
+    <string name="comments_hint">Comments</string>
+
+    <string name="button_add">Add Cheese</string>
     <string name="button_edit">Edit</string>
     <string name="button_delete">Delete</string>
 
-    <string name="button_save">Save Person</string>
-    <string name="button_update">Update Person</string>
+    <string name="button_save">Save Cheese</string>
+    <string name="button_update">Update Cheese</string>
 
     <string name="lose_changes_alert">Forget Changes?</string>
     <string name="lose_changes_alert_text">You are going to lose your changes if you continue, are you sure?</string>
@@ -31,6 +44,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <string name="NotificationTag">NameRemember</string>
-    <string name="Notification">Have you met any new people today?</string>
+    <string name="NotificationTag">CheeseRemember</string>
+    <string name="Notification">Have you met any new cheeses today?</string>
 </resources>
