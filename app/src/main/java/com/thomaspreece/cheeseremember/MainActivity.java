@@ -371,7 +371,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 String strDate = sdf.format(c.getTime());
 
 
-                File inFileName = this.getDatabasePath("NameDB");
+                File inFileName = this.getDatabasePath("CheeseDB");
                 String outFileName = externalFilesDir.toString() + "/NameDB_"+strDate+".bak";
                 String outFileNameOnly = "NameDB_"+strDate+".bak";
 

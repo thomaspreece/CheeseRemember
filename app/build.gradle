@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            keyAlias 'TomsKey'
+            keyAlias 'CheeseKey'
             keyPassword 'abc123'
             storeFile file('/home/tom/Android/toms-key.jks')
             storePassword 'abc123'
@@ -12,7 +12,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.thomaspreece.nameremember"
+        applicationId "com.thomaspreece.cheeseremember"
         minSdkVersion 17
         targetSdkVersion 29
         versionCode 6
