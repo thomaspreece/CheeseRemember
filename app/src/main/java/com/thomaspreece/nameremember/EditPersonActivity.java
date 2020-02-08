@@ -16,10 +16,10 @@ import android.widget.EditText;
 import java.util.List;
 
 public class EditPersonActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText firstN;
-    private EditText lastN;
+    private EditText cheeseN;
+    private EditText placeOfPurchase;
     private EditText desc;
-    private EditText interests;
+    private EditText comments;
     private AutoCompleteTextView keywords;
 
     NRSQLiteHelper db = new NRSQLiteHelper(this);
@@ -53,10 +53,10 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        firstN = (EditText) findViewById(R.id.firstN);
-        lastN = (EditText) findViewById(R.id.lastN);
+        cheeseN = (EditText) findViewById(R.id.cheeseN);
+        placeOfPurchase = (EditText) findViewById(R.id.placeOfPurchase);
         desc = (EditText) findViewById(R.id.desc);
-        interests = (EditText) findViewById(R.id.interests);
+        comments = (EditText) findViewById(R.id.comments);
         keywords = (AutoCompleteKeywordsTextBox) findViewById(R.id.tags);
 
         List<String> keywordList = db.getAllKeywords();
@@ -73,27 +73,27 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void populateFields(){
-        firstN.setText(person.getFirstName());
-        lastN.setText(person.getLastName());
+        cheeseN.setText(person.getCheeseName());
+        placeOfPurchase.setText(person.getPlaceOfPurchase());
         desc.setText(person.getDescription());
-        interests.setText(person.getInterests());
+        comments.setText(person.getComments());
         keywords.setText(person.getKeywordsString());
     }
 
     public void onClick(View v){
         if (type.equals("edit")) {
-            person.setFirstName(firstN.getText().toString());
-            person.setLastName(lastN.getText().toString());
+            person.setCheeseName(cheeseN.getText().toString());
+            person.setPlaceOfPurchase(placeOfPurchase.getText().toString());
             person.setDescription(desc.getText().toString());
-            person.setInterests(interests.getText().toString());
+            person.setComments(comments.getText().toString());
             person.setKeywords(keywords.getText().toString());
             db.updatePerson(person);
         }else {
-            String firstNameString = firstN.getText().toString();
-            String lastNameString = lastN.getText().toString();
+            String cheeseNameString = cheeseN.getText().toString();
+            String placeOfPurchaseameString = placeOfPurchase.getText().toString();
             String descriptionString = desc.getText().toString();
-            String interestsString = interests.getText().toString();
-            Person person = new Person(firstNameString, lastNameString, descriptionString, interestsString);
+            String commentsString = comments.getText().toString();
+            Person person = new Person(cheeseNameString, placeOfPurchaseameString, descriptionString, commentsString);
             person.setKeywords(keywords.getText().toString());
             db.createPerson(person);
         }

@@ -43,6 +43,32 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_alignParentStart="true"
         android:textSize="20dp" />
 
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:paddingTop="20dp"
+          android:paddingLeft="@dimen/activity_horizontal_margin"
+          android:paddingRight="@dimen/activity_horizontal_margin"
+          android:text="Place of Purchase"
+          android:id="@+id/popTextStatic"
+          android:layout_below="@+id/description"
+          android:layout_alignParentStart="true"
+          android:textSize="16dp" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:scrollbars = "vertical"
+          android:textIsSelectable="true"
+          android:text="New Text"
+          android:paddingLeft="@dimen/activity_horizontal_margin"
+          android:paddingRight="@dimen/activity_horizontal_margin"
+          android:id="@+id/placeOfPurchase"
+          android:layout_below="@+id/popTextStatic"
+          android:layout_alignParentStart="true"
+          android:textSize="20dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,9 +76,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingTop="20dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Interests"
+        android:text="Comments"
         android:id="@+id/iTextStatic"
-        android:layout_below="@+id/description"
+        android:layout_below="@+id/placeOfPurchase"
         android:layout_alignParentStart="true"
         android:textSize="16dp" />
 
@@ -65,7 +91,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:text="New Text"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:id="@+id/interests"
+        android:id="@+id/comments"
         android:layout_below="@+id/iTextStatic"
         android:layout_alignParentStart="true"
         android:textSize="20dp" />

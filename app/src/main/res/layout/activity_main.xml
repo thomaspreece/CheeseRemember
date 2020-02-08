@@ -53,6 +53,21 @@
             />
 
         <ToggleButton
+
+            android:layout_width="0dip"
+            android:textSize="10dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textOff="Place of Purchase"
+            android:textOn="Place of Purchase"
+            android:id="@+id/searchOptionButtonPlaceOfPurchase"
+            android:background="@drawable/search_option_toggle_buttons"
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/search_button_margin_top"
+            android:layout_marginBottom="@dimen/search_button_margin_bottom"
+            />
+
+        <ToggleButton
             android:layout_width="0dip"
             android:textSize="10dp"
             android:layout_weight="1"
@@ -85,9 +100,9 @@
             android:textSize="10dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textOff="Interests"
-            android:textOn="Interests"
-            android:id="@+id/searchOptionButtonInterests"
+            android:textOff="Comments"
+            android:textOn="Comments"
+            android:id="@+id/searchOptionButtonComments"
             android:background="@drawable/search_option_toggle_buttons"
             android:includeFontPadding="false"
             android:layout_marginTop="@dimen/search_button_margin_top"

@@ -24,21 +24,21 @@
             android:layout_weight="1"
             android:inputType="textPersonName"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:hint="First Name"
+            android:hint="Cheese Name"
             android:text=""
             android:ems="10"
-            android:id="@+id/firstN"
-            android:nextFocusDown="@+id/lastN"/>
+            android:id="@+id/cheeseN"
+            android:nextFocusDown="@+id/placeOfPurchase"/>
         <EditText
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="textPersonName"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:hint="Last Name"
+            android:hint="Place of Purchase"
             android:text=""
             android:ems="10"
-            android:id="@+id/lastN" />
+            android:id="@+id/placeOfPurchase" />
     </LinearLayout>
 
     <com.thomaspreece.nameremember.AutoCompleteKeywordsTextBox
@@ -67,8 +67,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/interests"
-        android:hint="interests"
+        android:id="@+id/comments"
+        android:hint="comments"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_weight="1"

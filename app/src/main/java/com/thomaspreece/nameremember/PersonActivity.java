@@ -17,8 +17,9 @@ import android.widget.TextView;
 public class PersonActivity extends AppCompatActivity {
     Person selectedPerson;
     NRSQLiteHelper db;
+    TextView placeOfPurchaseText;
     TextView descText;
-    TextView interestsText;
+    TextView commentsText;
     TextView keywordsText;
     int id;
     Button deleteButton;
@@ -48,8 +49,9 @@ public class PersonActivity extends AppCompatActivity {
         // read the book with "id" from the database
         selectedPerson = db.readPerson(id);
 
+        placeOfPurchaseText = (TextView) findViewById(R.id.placeOfPurchase);
         descText = (TextView) findViewById(R.id.description);
-        interestsText = (TextView) findViewById(R.id.interests);
+        commentsText = (TextView) findViewById(R.id.comments);
         keywordsText = (TextView) findViewById(R.id.keywords);
 
         initializeViews();
@@ -101,15 +103,16 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     public void initializeViews(){
+        placeOfPurchaseText.setText(selectedPerson.getPlaceOfPurchase());
         descText.setText(selectedPerson.getDescription());
         descText.setMovementMethod(new ScrollingMovementMethod());
         descText.setLongClickable(true);
         descText.setTextIsSelectable(true);
-        interestsText.setText(selectedPerson.getInterests());
-        interestsText.setMovementMethod(new ScrollingMovementMethod());
+        commentsText.setText(selectedPerson.getComments());
+        commentsText.setMovementMethod(new ScrollingMovementMethod());
         keywordsText.setText(selectedPerson.getKeywordsString());
 
-        setTitle(selectedPerson.getFullName());
+        setTitle(selectedPerson.getCheeseName());
     }
 
     @Override

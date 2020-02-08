@@ -48,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private ToggleButton recentToggle;
     private ToggleButton nameToggle;
+    private ToggleButton placeOfPurchaseToggle;
     private ToggleButton keywordsToggle;
     private ToggleButton descToggle;
-    private ToggleButton interestsToggle;
+    private ToggleButton commentsToggle;
     private LinearLayout searchOptionButtons;
     private LinearLayout addPersonButton;
 
@@ -110,9 +111,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         recentToggle = (ToggleButton) findViewById(R.id.searchOptionButtonRecent);
         nameToggle = (ToggleButton) findViewById(R.id.searchOptionButtonName);
+        placeOfPurchaseToggle  = (ToggleButton) findViewById(R.id.searchOptionButtonPlaceOfPurchase);
         keywordsToggle = (ToggleButton) findViewById(R.id.searchOptionButtonKeywords);
         descToggle = (ToggleButton) findViewById(R.id.searchOptionButtonDesc);
-        interestsToggle = (ToggleButton) findViewById(R.id.searchOptionButtonInterests);
+        commentsToggle = (ToggleButton) findViewById(R.id.searchOptionButtonComments);
         searchOptionButtons = (LinearLayout) findViewById(R.id.searchButtons);
 
         recentToggle.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +130,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             @Override
             public void onClick(View v) {
                 activeToggle = 1;
+                setToggles();
+                updateToggleSearch();
+            }
+        });
+
+        placeOfPurchaseToggle.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                activeToggle = 5;
                 setToggles();
                 updateToggleSearch();
             }
@@ -151,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
-        interestsToggle.setOnClickListener(new View.OnClickListener() {
+        commentsToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activeToggle = 4;
@@ -177,7 +188,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         nameToggle.setChecked(false);
         keywordsToggle.setChecked(false);
         descToggle.setChecked(false);
-        interestsToggle.setChecked(false);
+        commentsToggle.setChecked(false);
+        placeOfPurchaseToggle.setChecked(false);
 
         switch (activeToggle){
             case 0:
@@ -193,7 +205,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 descToggle.setChecked(true);
                 break;
             case 4:
-                interestsToggle.setChecked(true);
+                commentsToggle.setChecked(true);
+                break;
+            case 5:
+                placeOfPurchaseToggle.setChecked(true);
                 break;
             default:
                 throw new RuntimeException("Invalid Toggle State: "+activeToggle );
@@ -217,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         for (int i = 0; i < personList.size(); i++) {
             HashMap<String,String> temp = new HashMap<>();
-            temp.put("name", personList.get(i).getFirstName()+" "+personList.get(i).getLastName());
+            temp.put("name", personList.get(i).getCheeseName());
             if(searchOptionsButtonsInView == true){
                 switch(activeToggle){
                     case 0:
@@ -231,7 +246,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         temp.put("other", personList.get(i).getKeywordsString());
                         break;
                     case 4:
-                        temp.put("other", personList.get(i).getInterests());
+                        temp.put("other", personList.get(i).getComments());
+                        break;
+                    case 5:
+                        temp.put("other", personList.get(i).getPlaceOfPurchase());
                         break;
                     default:
                         throw new RuntimeException("Invalid Toggle State: "+activeToggle );

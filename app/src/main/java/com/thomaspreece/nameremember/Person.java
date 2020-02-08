@@ -11,10 +11,10 @@ import java.util.Locale;
 
 public class Person {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String cheeseName;
+    private String placeOfPurchase;
     private String description;
-    private String interests;
+    private String comments;
     private Date date;
 
     private List<String> keywords;
@@ -23,28 +23,26 @@ public class Person {
         this.keywords = new ArrayList<>();
     }
 
-    public Person(String firstName, String lastName, String description, String interests){
+    public Person(String cheeseName, String placeOfPurchase, String description, String comments){
         super();
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.cheeseName = cheeseName;
+        this.placeOfPurchase = placeOfPurchase;
         this.description = description;
-        this.interests = interests;
+        this.comments = comments;
         this.keywords = new ArrayList<>();
     }
 
-    public String getFirstName() {return this.firstName;}
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public String getCheeseName() {return this.cheeseName;}
+    public void setCheeseName(String cheeseName) {this.cheeseName = cheeseName;}
 
-    public String getLastName() {return this.lastName;}
-    public void setLastName(String lastName) {this.lastName = lastName;}
-
-    public String getFullName() {return this.firstName + " " +this.lastName; }
+    public String getPlaceOfPurchase() {return this.placeOfPurchase;}
+    public void setPlaceOfPurchase(String placeOfPurchase) {this.placeOfPurchase = placeOfPurchase;}
 
     public String getDescription() {return this.description;}
     public void setDescription(String description) {this.description = description;}
 
-    public String getInterests() {return this.interests;}
-    public void setInterests(String interests) {this.interests = interests;}
+    public String getComments() {return this.comments;}
+    public void setComments(String comments) {this.comments = comments;}
 
     public List<String> getKeywords() {return this.keywords;}
     public String getKeywordsString() {return android.text.TextUtils.join(" , ", this.keywords);}
