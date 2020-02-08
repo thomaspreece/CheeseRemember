@@ -23,24 +23,24 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
     // database name
     private static final String database_NAME = "CheeseDB";
 
-    private static final String table_PERSONS = "persons";
-    private static final String persons_ID = "id";
-    private static final String persons_CHEESENAME = "cheeseN";
-    private static final String persons_PLACEOFPURCHASE = "placeOfPurchase";
-    private static final String persons_DESC = "desc";
-    private static final String persons_COMMENTS = "comments";
-    private static final String persons_DATE = "date";
-    private static final String[] table_PERSONS_COLUMNS = { persons_ID, persons_CHEESENAME, persons_PLACEOFPURCHASE, persons_DESC, persons_COMMENTS, persons_DATE };
+    private static final String table_CHEESES = "cheeses";
+    private static final String cheeses_ID = "id";
+    private static final String cheeses_CHEESENAME = "cheeseName";
+    private static final String cheeses_PLACEOFPURCHASE = "placeOfPurchase";
+    private static final String cheeses_DESC = "desc";
+    private static final String cheeses_COMMENTS = "comments";
+    private static final String cheeses_DATE = "date";
+    private static final String[] table_CHEESES_COLUMNS = { cheeses_ID, cheeses_CHEESENAME, cheeses_PLACEOFPURCHASE, cheeses_DESC, cheeses_COMMENTS, cheeses_DATE };
 
     private static final String table_KEYWORDS = "keywords";
     private static final String keywords_ID = "id";
     private static final String keywords_KEYWORD = "keyword";
     private static final String[] table_KEYWORDS_COLUMNS = {keywords_ID, keywords_KEYWORD };
 
-    private static final String table_PERSONS_KEYWORDS = "persons_keywords";
-    private static final String persons_keywords_NAME_ID = "person_id";
-    private static final String persons_keywords_KEYWORD_ID = "keyword_id";
-    private static final String[] table_PERSONS_KEYWORDS_COLUMNS = {persons_keywords_NAME_ID,persons_keywords_KEYWORD_ID};
+    private static final String table_CHEESES_KEYWORDS = "cheeses_keywords";
+    private static final String cheeses_keywords_NAME_ID = "cheese_id";
+    private static final String cheeses_keywords_KEYWORD_ID = "keyword_id";
+    private static final String[] table_CHEESES_KEYWORDS_COLUMNS = {cheeses_keywords_NAME_ID,cheeses_keywords_KEYWORD_ID};
 
 
     public NRSQLiteHelper(Context context) {
@@ -50,8 +50,8 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create person table
-        String CREATE_NAME_TABLE = "CREATE TABLE " + table_PERSONS + " ( " + persons_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " + persons_CHEESENAME + " TEXT, " + persons_PLACEOFPURCHASE + " TEXT, " + persons_DESC + " TEXT, "+ persons_COMMENTS + " TEXT," + persons_DATE +" TIMESTAMP DEFAULT CURRENT_TIMESTAMP  )";
-        String CREATE_NAMES_KEYWORDS_TABLE = "CREATE TABLE " + table_PERSONS_KEYWORDS + " ( " + persons_keywords_NAME_ID + " INTEGER, " + persons_keywords_KEYWORD_ID + " INTEGER )";
+        String CREATE_NAME_TABLE = "CREATE TABLE " + table_CHEESES + " ( " + cheeses_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " + cheeses_CHEESENAME + " TEXT, " + cheeses_PLACEOFPURCHASE + " TEXT, " + cheeses_DESC + " TEXT, "+ cheeses_COMMENTS + " TEXT," + cheeses_DATE +" TIMESTAMP DEFAULT CURRENT_TIMESTAMP  )";
+        String CREATE_NAMES_KEYWORDS_TABLE = "CREATE TABLE " + table_CHEESES_KEYWORDS + " ( " + cheeses_keywords_NAME_ID + " INTEGER, " + cheeses_keywords_KEYWORD_ID + " INTEGER )";
         String CREATE_KEYWORDS_TABLE = "CREATE TABLE " + table_KEYWORDS + " ( " + keywords_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + keywords_KEYWORD + " TEXT )";
         db.execSQL(CREATE_NAME_TABLE);
         db.execSQL(CREATE_NAMES_KEYWORDS_TABLE);
@@ -62,9 +62,9 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // drop persons table if already exists
         if (oldVersion<4) {
-            db.execSQL("DROP TABLE IF EXISTS persons");
-            db.execSQL("DROP TABLE IF EXISTS persons_keywords");
-            db.execSQL("DROP TABLE IF EXISTS keywords");
+            db.execSQL("DROP TABLE IF EXISTS " + table_CHEESES);
+            db.execSQL("DROP TABLE IF EXISTS " + table_CHEESES_KEYWORDS);
+            db.execSQL("DROP TABLE IF EXISTS " + table_KEYWORDS);
             this.onCreate(db);
         }
     }
@@ -75,13 +75,13 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
 
         // make values to be inserted
         ContentValues values = new ContentValues();
-        values.put(persons_CHEESENAME, person.getCheeseName());
-        values.put(persons_PLACEOFPURCHASE, person.getPlaceOfPurchase());
-        values.put(persons_DESC, person.getDescription());
-        values.put(persons_COMMENTS, person.getComments());
+        values.put(cheeses_CHEESENAME, person.getCheeseName());
+        values.put(cheeses_PLACEOFPURCHASE, person.getPlaceOfPurchase());
+        values.put(cheeses_DESC, person.getDescription());
+        values.put(cheeses_COMMENTS, person.getComments());
 
         // insert person
-        long nameID = db.insert(table_PERSONS, null, values);
+        long nameID = db.insert(table_CHEESES, null, values);
 
         //insert keywords
         List<String> keywordsList = person.getKeywords();
@@ -98,9 +98,9 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
                 }
                 cursor_keywords.close();
                 ContentValues name_keyword = new ContentValues();
-                name_keyword.put(persons_keywords_NAME_ID, nameID);
-                name_keyword.put(persons_keywords_KEYWORD_ID, keywordID);
-                db.insert(table_PERSONS_KEYWORDS, null, name_keyword);
+                name_keyword.put(cheeses_keywords_NAME_ID, nameID);
+                name_keyword.put(cheeses_keywords_KEYWORD_ID, keywordID);
+                db.insert(table_CHEESES_KEYWORDS, null, name_keyword);
             }
         }
 
@@ -134,36 +134,36 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         // Get all persons
         if(term == null || term.trim().length() == 0 ){
             if(searchType==0){
-                cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_DATE + " COLLATE NOCASE DESC, " + persons_PLACEOFPURCHASE + " COLLATE NOCASE ASC, " + persons_CHEESENAME + " COLLATE NOCASE ASC");
+                cursor = db.query(table_CHEESES, table_CHEESES_COLUMNS, "", null, null, null, cheeses_DATE + " COLLATE NOCASE DESC, " + cheeses_PLACEOFPURCHASE + " COLLATE NOCASE ASC, " + cheeses_CHEESENAME + " COLLATE NOCASE ASC");
             }else if(searchType==1) {
-                cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_CHEESENAME + " COLLATE NOCASE ASC, " + persons_PLACEOFPURCHASE + " COLLATE NOCASE ASC");
+                cursor = db.query(table_CHEESES, table_CHEESES_COLUMNS, "", null, null, null, cheeses_CHEESENAME + " COLLATE NOCASE ASC, " + cheeses_PLACEOFPURCHASE + " COLLATE NOCASE ASC");
             }else{
-                cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_PLACEOFPURCHASE + " COLLATE NOCASE ASC, " + persons_CHEESENAME + " COLLATE NOCASE ASC");
+                cursor = db.query(table_CHEESES, table_CHEESES_COLUMNS, "", null, null, null, cheeses_PLACEOFPURCHASE + " COLLATE NOCASE ASC, " + cheeses_CHEESENAME + " COLLATE NOCASE ASC");
             }
         }else {
             switch (searchType) {
                 case 0:
-                    searchQuery = "SELECT * FROM " + table_PERSONS + " WHERE `" + persons_DATE + "` LIKE ? ORDER BY " + persons_DATE + " COLLATE NOCASE DESC ," +  persons_CHEESENAME + " COLLATE NOCASE ASC";
+                    searchQuery = "SELECT * FROM " + table_CHEESES + " WHERE `" + cheeses_DATE + "` LIKE ? ORDER BY " + cheeses_DATE + " COLLATE NOCASE DESC ," +  cheeses_CHEESENAME + " COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%"});
                     break;
                 case 1:
-                    searchQuery = "SELECT * FROM " + table_PERSONS + " WHERE (" + persons_CHEESENAME + ") LIKE ? ORDER BY (" + persons_CHEESENAME + ") = ? COLLATE NOCASE DESC, " + persons_CHEESENAME + " LIKE ? DESC, " + persons_CHEESENAME + " COLLATE NOCASE ASC";
+                    searchQuery = "SELECT * FROM " + table_CHEESES + " WHERE (" + cheeses_CHEESENAME + ") LIKE ? ORDER BY (" + cheeses_CHEESENAME + ") = ? COLLATE NOCASE DESC, " + cheeses_CHEESENAME + " LIKE ? DESC, " + cheeses_CHEESENAME + " COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term.toLowerCase() + "%", term.toLowerCase(), "%" + term.toLowerCase() + "%"});
                     break;
                 case 2:
-                    searchQuery = "SELECT DISTINCT " + table_PERSONS + ".* FROM ((" + table_PERSONS_KEYWORDS + " INNER JOIN " + table_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_PERSONS_KEYWORDS + "." + persons_keywords_KEYWORD_ID + " AND " + table_KEYWORDS + "." + keywords_KEYWORD + " LIKE ?) INNER JOIN " + table_PERSONS + " ON " + table_PERSONS + "." + persons_ID + " = " + table_PERSONS_KEYWORDS + "." + persons_keywords_NAME_ID + " ) ORDER BY  " + table_KEYWORDS + "." + keywords_KEYWORD + " = ? DESC ," + table_KEYWORDS + "." + keywords_KEYWORD + " LIKE ? DESC, " + persons_CHEESENAME + " COLLATE NOCASE ASC";
+                    searchQuery = "SELECT DISTINCT " + table_CHEESES + ".* FROM ((" + table_CHEESES_KEYWORDS + " INNER JOIN " + table_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_KEYWORD_ID + " AND " + table_KEYWORDS + "." + keywords_KEYWORD + " LIKE ?) INNER JOIN " + table_CHEESES + " ON " + table_CHEESES + "." + cheeses_ID + " = " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_NAME_ID + " ) ORDER BY  " + table_KEYWORDS + "." + keywords_KEYWORD + " = ? DESC ," + table_KEYWORDS + "." + keywords_KEYWORD + " LIKE ? DESC, " + cheeses_CHEESENAME + " COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%", term, "%" + term + "%"});
                     break;
                 case 3:
-                    searchQuery = "SELECT * FROM " + table_PERSONS + " WHERE `" + persons_DESC + "` LIKE ? ORDER BY " + persons_CHEESENAME + " COLLATE NOCASE ASC";
+                    searchQuery = "SELECT * FROM " + table_CHEESES + " WHERE `" + cheeses_DESC + "` LIKE ? ORDER BY " + cheeses_CHEESENAME + " COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%"});
                     break;
                 case 4:
-                    searchQuery = "SELECT * FROM " + table_PERSONS + " WHERE " + persons_COMMENTS + " LIKE ? ORDER BY " + persons_CHEESENAME + " COLLATE NOCASE ASC";
+                    searchQuery = "SELECT * FROM " + table_CHEESES + " WHERE " + cheeses_COMMENTS + " LIKE ? ORDER BY " + cheeses_CHEESENAME + " COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%"});
                     break;
                 case 5:
-                    searchQuery = "SELECT * FROM " + table_PERSONS + " WHERE " + persons_PLACEOFPURCHASE + " LIKE ? ORDER BY " + persons_CHEESENAME + " COLLATE NOCASE ASC";
+                    searchQuery = "SELECT * FROM " + table_CHEESES + " WHERE " + cheeses_PLACEOFPURCHASE + " LIKE ? ORDER BY " + cheeses_CHEESENAME + " COLLATE NOCASE ASC";
                     cursor = db.rawQuery(searchQuery, new String[]{"%" + term + "%"});
                     break;
                 default:
@@ -192,7 +192,7 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
                     //handle exception
                 }
 
-                String keywords_query = "SELECT " + table_KEYWORDS + "." + keywords_KEYWORD + " FROM " + table_KEYWORDS + " LEFT JOIN " + table_PERSONS_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_PERSONS_KEYWORDS + "." + persons_keywords_KEYWORD_ID + " WHERE " + table_PERSONS_KEYWORDS + "." + persons_keywords_NAME_ID + " = ?";
+                String keywords_query = "SELECT " + table_KEYWORDS + "." + keywords_KEYWORD + " FROM " + table_KEYWORDS + " LEFT JOIN " + table_CHEESES_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_KEYWORD_ID + " WHERE " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_NAME_ID + " = ?";
                 Cursor cursor_keywords = db.rawQuery(keywords_query, new String[]{String.valueOf(person.getId())});
                 if (cursor_keywords.moveToFirst()) {
                     do {
@@ -217,7 +217,7 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         // get reference of the NamesDB database
         SQLiteDatabase db = this.getWritableDatabase();
         // Get all persons
-        Cursor cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, "", null, null, null, persons_CHEESENAME+" COLLATE NOCASE ASC");
+        Cursor cursor = db.query(table_CHEESES, table_CHEESES_COLUMNS, "", null, null, null, cheeses_CHEESENAME+" COLLATE NOCASE ASC");
 
         // parse all results
         Person person;
@@ -239,7 +239,7 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
                     //handle exception
                 }
 
-                String keywords_query = "SELECT " + table_KEYWORDS + "." + keywords_KEYWORD + " FROM " + table_KEYWORDS + " LEFT JOIN " + table_PERSONS_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_PERSONS_KEYWORDS + "." + persons_keywords_KEYWORD_ID + " WHERE " + table_PERSONS_KEYWORDS + "." + persons_keywords_NAME_ID + " = ?";
+                String keywords_query = "SELECT " + table_KEYWORDS + "." + keywords_KEYWORD + " FROM " + table_KEYWORDS + " LEFT JOIN " + table_CHEESES_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_KEYWORD_ID + " WHERE " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_NAME_ID + " = ?";
                 Cursor cursor_keywords = db.rawQuery(keywords_query, new String[]{String.valueOf(person.getId())});
                 if (cursor_keywords.moveToFirst()) {
                     do {
@@ -263,18 +263,18 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
 
         // make values to be inserted
         ContentValues values = new ContentValues();
-        values.put(persons_CHEESENAME, person.getCheeseName());
-        values.put(persons_PLACEOFPURCHASE, person.getPlaceOfPurchase());
-        values.put(persons_DESC, person.getDescription());
-        values.put(persons_COMMENTS, person.getComments());
+        values.put(cheeses_CHEESENAME, person.getCheeseName());
+        values.put(cheeses_PLACEOFPURCHASE, person.getPlaceOfPurchase());
+        values.put(cheeses_DESC, person.getDescription());
+        values.put(cheeses_COMMENTS, person.getComments());
 
         Integer nameID = person.getId();
 
         // update
-        db.update(table_PERSONS, values, persons_ID + " = ?", new String[]{String.valueOf(nameID)});
+        db.update(table_CHEESES, values, cheeses_ID + " = ?", new String[]{String.valueOf(nameID)});
 
         //delete keywords
-        db.delete(table_PERSONS_KEYWORDS, persons_keywords_NAME_ID + " = ?", new String[] { String.valueOf(nameID) });
+        db.delete(table_CHEESES_KEYWORDS, cheeses_keywords_NAME_ID + " = ?", new String[] { String.valueOf(nameID) });
 
         //insert keywords
         List<String> keywordsList = person.getKeywords();
@@ -291,9 +291,9 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
                 }
 
                 ContentValues name_keyword = new ContentValues();
-                name_keyword.put(persons_keywords_NAME_ID, nameID);
-                name_keyword.put(persons_keywords_KEYWORD_ID, keywordID);
-                db.insert(table_PERSONS_KEYWORDS, null, name_keyword);
+                name_keyword.put(cheeses_keywords_NAME_ID, nameID);
+                name_keyword.put(cheeses_keywords_KEYWORD_ID, keywordID);
+                db.insert(table_CHEESES_KEYWORDS, null, name_keyword);
                 cursor_keywords.close();
             }
         }
@@ -309,8 +309,8 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // delete person
-        db.delete(table_PERSONS, persons_ID + " = ?", new String[] { String.valueOf(person.getId()) });
-        db.delete(table_PERSONS_KEYWORDS, persons_keywords_NAME_ID + " = ?", new String[] { String.valueOf(person.getId()) });
+        db.delete(table_CHEESES, cheeses_ID + " = ?", new String[] { String.valueOf(person.getId()) });
+        db.delete(table_CHEESES_KEYWORDS, cheeses_keywords_NAME_ID + " = ?", new String[] { String.valueOf(person.getId()) });
         this.cleanKeywords(db);
         db.close();
     }
@@ -322,8 +322,8 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // delete person
-        db.delete(table_PERSONS, persons_ID + " = ?", new String[] { String.valueOf(personId) });
-        db.delete(table_PERSONS_KEYWORDS, persons_keywords_NAME_ID + " = ?", new String[] { String.valueOf(personId) });
+        db.delete(table_CHEESES, cheeses_ID + " = ?", new String[] { String.valueOf(personId) });
+        db.delete(table_CHEESES_KEYWORDS, cheeses_keywords_NAME_ID + " = ?", new String[] { String.valueOf(personId) });
         this.cleanKeywords(db);
         db.close();
     }
@@ -334,7 +334,7 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
         Cursor cursor;
 
         // get book query
-        cursor = db.query(table_PERSONS, table_PERSONS_COLUMNS, " id = ?", new String[] { String.valueOf(id) }, null, null, null, null);
+        cursor = db.query(table_CHEESES, table_CHEESES_COLUMNS, " id = ?", new String[] { String.valueOf(id) }, null, null, null, null);
 
         // if results !=null, parse the first one
         if (cursor != null) {
@@ -348,7 +348,7 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
             person.setComments(cursor.getString(4));
 
 
-            String keywords_query = "SELECT " + table_KEYWORDS + "." + keywords_KEYWORD + " FROM " + table_KEYWORDS + " LEFT JOIN " + table_PERSONS_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_PERSONS_KEYWORDS + "." + persons_keywords_KEYWORD_ID + " WHERE " + table_PERSONS_KEYWORDS + "." + persons_keywords_NAME_ID + " = ?";
+            String keywords_query = "SELECT " + table_KEYWORDS + "." + keywords_KEYWORD + " FROM " + table_KEYWORDS + " LEFT JOIN " + table_CHEESES_KEYWORDS + " ON " + table_KEYWORDS + "." + keywords_ID + " = " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_KEYWORD_ID + " WHERE " + table_CHEESES_KEYWORDS + "." + cheeses_keywords_NAME_ID + " = ?";
             cursor = db.rawQuery(keywords_query, new String[]{String.valueOf(id)});
 
             if (cursor.moveToFirst()) {
@@ -369,7 +369,7 @@ public class NRSQLiteHelper extends SQLiteOpenHelper{
 
     public void cleanKeywords(SQLiteDatabase db) {
         // get reference of the NamesDB database
-        String keywords_query = "DELETE FROM keywords WHERE id IN (SELECT keywords.id FROM keywords LEFT JOIN persons_keywords ON keywords.id = persons_keywords.keyword_id WHERE persons_keywords.person_id IS NULL)";
+        String keywords_query = "DELETE FROM keywords WHERE id IN (SELECT keywords.id FROM keywords LEFT JOIN cheeses_keywords ON keywords.id = cheeses_keywords.keyword_id WHERE cheeses_keywords.person_id IS NULL)";
         db.execSQL(keywords_query);
     }
 }
