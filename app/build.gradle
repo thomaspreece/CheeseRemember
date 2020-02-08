@@ -3,20 +3,24 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            keyAlias 'ThomasPreece'
-            keyPassword 'William20'
-            storeFile file('C:/Users/tom/AndroidStudioProjects/my-release-key.keystore')
-            storePassword 'William20'
+            keyAlias 'TomsKey'
+            keyPassword 'abc123'
+            storeFile file('/home/tom/Android/toms-key.jks')
+            storePassword 'abc123'
         }
     }
-    compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.thomaspreece.nameremember"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 29
         versionCode 6
         versionName "1.5"
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
     buildTypes {
         release {
@@ -28,6 +32,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:23.1.1'
 }
